@@ -68,6 +68,12 @@ class FeedItemWidget extends StatelessWidget {
               imageUrl: feed.imageUrl,
               videoUrl: feed.videoUrl,
             ),
+            10.vs(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: CustomText(fontSize: 12,fontWeight: FontWeight.w300,text: 'Lorem ipsum dolor sit amet consectetur. Leo ac lorem faucli bus facilisis tellus. At vitae dis commodo nunc sollicitudin elementum suspendisse...'),
+            ),
+
           ],
         );
       },

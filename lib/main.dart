@@ -11,6 +11,7 @@ import 'package:machine_test_round_2_noviindus/presentation/providers/auth_provi
 import 'package:machine_test_round_2_noviindus/presentation/providers/category_provider.dart';
 import 'package:machine_test_round_2_noviindus/presentation/providers/home_feed_provider.dart';
 import 'package:machine_test_round_2_noviindus/presentation/providers/video_provider.dart';
+import 'package:machine_test_round_2_noviindus/presentation/screens/add_feeds_screen.dart';
 import 'package:machine_test_round_2_noviindus/presentation/screens/home_screen.dart';
 import 'package:machine_test_round_2_noviindus/presentation/screens/login_screen.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home:HomeScreen() //AuthScreen(),
+        home:AddFeedsScreen() //AuthScreen(),
       ),
     );
   }

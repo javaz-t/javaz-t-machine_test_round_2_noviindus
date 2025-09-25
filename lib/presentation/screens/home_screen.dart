@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test_round_2_noviindus/core/constants/app_colors.dart';
+import 'package:machine_test_round_2_noviindus/core/extensions/navigation_extension.dart';
 import 'package:machine_test_round_2_noviindus/core/extensions/sized_box_extension.dart';
+import 'package:machine_test_round_2_noviindus/presentation/screens/add_feeds_screen.dart';
 import 'package:machine_test_round_2_noviindus/presentation/widgets/category_list.dart';
 import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_text.dart';
 import 'package:machine_test_round_2_noviindus/presentation/widgets/feed_items.dart';
@@ -33,6 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: (){
+          pushToScreen(AddFeedsScreen(), context);
+        },
+        child: CircleAvatar(
+          radius: 30,
+          backgroundColor: AppColors.accentRed,
+          child: Icon(Icons.add, color: Colors.white, size: 40),
+        ),
+      ),
       backgroundColor: AppColors.primaryBackground,
       body: SingleChildScrollView(
         child: Column(
@@ -44,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min
-                  ,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 17),
@@ -68,14 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 17),
-                  child: CircleAvatar(),
-                )
+                  child: CircleAvatar(child: Icon(Icons.person)),
+                ),
               ],
-            )
-           ,
-         32.vs(),
+            ),
+            32.vs(),
 
-             const CategoryList(),
+            const CategoryList(),
 
             Consumer<HomeFeedProvider>(
               builder: (context, provider, child) {
@@ -92,11 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-padding: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
                   itemCount: provider.feeds.length,
                   itemBuilder: (context, index) {
                     final feed = provider.feeds[index];
-                    return  FeedItemWidget(feed: feed, index: index);
+                    return FeedItemWidget(feed: feed, index: index);
                   },
                 );
               },
