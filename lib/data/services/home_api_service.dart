@@ -1,12 +1,12 @@
  import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:machine_test_round_2_noviindus/core/constants/constants.dart';
+import 'package:machine_test_round_2_noviindus/core/constants/api_constants.dart';
 import '../model/feed_model.dart';
 
 class HomeApiService {
 
   Future<List<FeedModel>> fetchHomeFeeds() async {
-    final url = Uri.parse(AppConstats.baseUrl+AppConstats.home);
+    final url = Uri.parse(ApiConstats.baseUrl+ApiConstats.home);
 
 
     final response = await http.get(url,  );

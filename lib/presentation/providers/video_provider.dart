@@ -3,6 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoProvider with ChangeNotifier {
+  int _videoIndexForAutoPlay = 0;
+
+  int get videoIndexForAutoPlay => _videoIndexForAutoPlay;
+  void updateVideoIndex(int index) {
+    _videoIndexForAutoPlay = index;
+    notifyListeners();
+  }
+
   VideoPlayerController? _currentController;
   int? _currentIndex;
   bool _isInitializing = false;

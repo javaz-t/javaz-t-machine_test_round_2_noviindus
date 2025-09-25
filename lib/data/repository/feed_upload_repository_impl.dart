@@ -5,7 +5,7 @@ import '../../domain/repository/feed_upload_repository.dart';
 class FeedUploadRepositoryImpl implements FeedUploadRepository {
   final FeedUploadService service;
 
-  FeedUploadRepositoryImpl(this.service);
+  FeedUploadRepositoryImpl(this.service, );
 
   @override
   Future<void> uploadFeed({

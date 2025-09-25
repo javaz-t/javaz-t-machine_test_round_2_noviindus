@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test_round_2_noviindus/core/constants/app_colors.dart';
 import 'package:machine_test_round_2_noviindus/presentation/providers/category_provider.dart';
+import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_shimmer.dart';
 import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
@@ -14,13 +15,7 @@ class CategoryList extends StatelessWidget {
     return Consumer<CategoryProvider>(
       builder: (context, categoryProvider, child) {
         if (categoryProvider.isLoading) {
-          return const Center(
-            child: SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            ),
-          );
+          return CategoryShimmer();
         }
 
         if (categoryProvider.errorMessage != null) {
@@ -42,10 +37,10 @@ class CategoryList extends StatelessWidget {
         }
 
         return SizedBox(
-          height: 35,
+          height: 50,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 10),
             itemCount: categoryProvider.categories.length,
             itemBuilder: (context, index) {
               final category = categoryProvider.categories[index];

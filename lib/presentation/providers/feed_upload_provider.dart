@@ -121,13 +121,9 @@ class FeedUploadProvider with ChangeNotifier {
       _setMessage('Feed uploaded successfully!');
       _clearForm();
     } catch (e) {
-      if (e.toString() == "Exception: Feed added successfully") {
-        _setMessage('Feed uploaded successfully!');
-        _clearForm();
-      }
-      _setMessage('Feed uploaded successfully!');
-      _clearForm();
-    } finally {
+
+      _setMessage('Error $e');
+     } finally {
       _isLoading = false;
       notifyListeners();
     }
@@ -142,10 +138,23 @@ class FeedUploadProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearVideos() {
+    _videoFiles.clear();
+    notifyListeners();
+
+  }
+
+  void clearImages() {
+    _imageFiles.clear();
+    notifyListeners();
+
+  }
+
   void _clearForm() {
     _videoFiles.clear();
     _imageFiles.clear();
     _description = '';
     _selectedCategoryIds.clear();
+    notifyListeners();
   }
 }

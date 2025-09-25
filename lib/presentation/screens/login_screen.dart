@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:machine_test_round_2_noviindus/core/constants/app_colors.dart';
 import 'package:machine_test_round_2_noviindus/core/extensions/navigation_extension.dart';
 import 'package:machine_test_round_2_noviindus/core/extensions/sized_box_extension.dart';
+import 'package:machine_test_round_2_noviindus/core/helper/toast_util.dart';
 import 'package:machine_test_round_2_noviindus/presentation/screens/home_screen.dart';
 import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_text.dart';
- import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -14,6 +15,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    phoneController.text='8129466718';
     return Scaffold(
       backgroundColor: AppColors.primaryBackground,
       body: Padding(
@@ -36,22 +38,33 @@ class AuthScreen extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 60,height: 55,
-                  decoration: BoxDecoration(border: BoxBorder.all(width: 1,color: Colors.white),borderRadius: BorderRadius.circular(5)),
-                  child: Center(child: CustomText(text: '+91',fontWeight: FontWeight.w400,fontSize: 20,))),10.hs(),
+                  width: 60,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    border: BoxBorder.all(width: .5, color: Colors.white),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: CustomText(
+                      text: '+91',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                10.hs(),
                 Expanded(
                   child: TextField(
                     controller: phoneController,
+                    style: TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
                       labelText: "Enter Phone Number",
-                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)), // Optional: Rounded corners
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                       prefixIcon: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        // Placeholder for a Country Code Picker Widget
 
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8.0),
+                        ), // Optional: Rounded corners
+                        borderSide: BorderSide(color: Colors.white),
                       ),
                     ),
                   ),
@@ -67,35 +80,28 @@ class AuthScreen extends StatelessWidget {
                   }
                   return GestureDetector(
                     onTap: () async {
-                      await authProvider.verifyOtp("+91", "8129466718");
+                      await authProvider.verifyOtp("+91",phoneController.text );
                       if (authProvider.token != null) {
-                        print("acees token ${authProvider.token!.access}");
                         pushAndRemoveUntilScreen(HomeScreen(), context);
                       } else if (authProvider.failure != null) {
-                        // Failure → show snackbar
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(authProvider.failure!.errorMessage),
-                            backgroundColor: Colors.red,
-                          ),
+                        ToastUtils.showError(
+                          context,
+                          authProvider.failure!.errorMessage,
                         );
                       }
                     },
                     child: Container(
-                      // Added decoration for border and curve
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.white, // Border color
+                          color: Colors.white,
                           width: 1.0, // Border thickness
                         ),
-                        borderRadius: BorderRadius.circular(
-                          50.0,
-                        ), // Fully curved sides
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
-                      ), // Added padding to space content from border
+                      ),
 
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

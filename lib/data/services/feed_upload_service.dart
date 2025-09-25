@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:machine_test_round_2_noviindus/core/constants/constants.dart';
+import 'package:machine_test_round_2_noviindus/core/constants/api_constants.dart';
 
 class FeedUploadService {
 
@@ -12,7 +12,7 @@ class FeedUploadService {
     required String description,
     required List<int> categoryIds,
   }) async {
-    final uri = Uri.parse(AppConstats.baseUrl + AppConstats.feedUpload);
+    final uri = Uri.parse(ApiConstats.baseUrl + ApiConstats.feedUpload);
     final request = http.MultipartRequest('POST', uri);
 
      request.headers['Authorization'] = 'Bearer $accessToken';

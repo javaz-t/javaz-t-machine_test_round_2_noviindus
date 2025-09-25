@@ -34,8 +34,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> loadCachedToken() async {
-    // Optional: load token on app startup
-    final result = await verifyOtpUseCase.getCachedToken();
+     final result = await verifyOtpUseCase.getCachedToken();
     result.fold(
       (fail) {
         token = null;

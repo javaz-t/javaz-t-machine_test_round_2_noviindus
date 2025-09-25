@@ -11,6 +11,6 @@ class HomeRepositoryImpl implements HomeRepository {
   @override
   Future<List<FeedEntity>> getHomeFeeds() async {
     final feeds = await apiService.fetchHomeFeeds();
-    return feeds; // Returns List<FeedModel> which extends List<FeedEntity>
+    return feeds;
   }
 }

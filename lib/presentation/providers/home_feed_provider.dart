@@ -1,13 +1,17 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:machine_test_round_2_noviindus/domain/entity/feed_entity.dart';
 import 'package:machine_test_round_2_noviindus/domain/use_case/get_home_feed.dart';
-import 'package:machine_test_round_2_noviindus/presentation/providers/category_provider.dart';
+
+import '../../core/connection/network_info.dart';
 
 class HomeFeedProvider with ChangeNotifier {
+  final NetworkInfo networkInfo;
+
   final GetHomeFeedsUseCase getHomeFeedsUseCase;
 
-  HomeFeedProvider(this.getHomeFeedsUseCase);
-
+  HomeFeedProvider(this.getHomeFeedsUseCase, this.networkInfo);
+  bool _isNetWorkDown = false;
+  get isNetWorkDown => _isNetWorkDown;
   List<FeedEntity> _feeds = [];
   bool _isLoading = false;
   String? _errorMessage;
@@ -20,7 +24,15 @@ class HomeFeedProvider with ChangeNotifier {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
+    final isConnected = await networkInfo.isConnected;
+    if    (!(isConnected ?? false)) {
+      _isNetWorkDown = true;
+      notifyListeners();
+    }else{
+      _isNetWorkDown=false;
+      notifyListeners();
 
+    }
     try {
       _feeds = await getHomeFeedsUseCase.call();
       _errorMessage = null;
@@ -32,5 +44,4 @@ class HomeFeedProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
 }
