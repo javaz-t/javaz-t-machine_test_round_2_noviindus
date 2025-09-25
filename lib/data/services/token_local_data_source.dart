@@ -11,7 +11,7 @@ class TokenLocalDataSource {
     await prefs.setString(refreshKey, token.refresh);
   }
 
-  Future<TokenModel?> getCachedToken() async {
+static  Future<TokenModel?> getCachedToken() async {
     final prefs = await SharedPreferences.getInstance();
     final access = prefs.getString(accessKey);
     final refresh = prefs.getString(refreshKey);

@@ -36,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: (){
-          pushToScreen(AddFeedsScreen(), context);
+        onTap: () {
+          pushToScreen(AddFeedPage(), context);
         },
         child: CircleAvatar(
           radius: 30,

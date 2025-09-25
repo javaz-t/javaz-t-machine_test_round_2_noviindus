@@ -12,7 +12,6 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthService service;
   final TokenLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
-
   AuthRepositoryImpl({
     required this.service,
     required this.localDataSource,
@@ -55,7 +54,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, Token?>> getCachedToken() async {
     try {
-      final tokenModel = await localDataSource.getCachedToken();
+      final tokenModel = await TokenLocalDataSource.getCachedToken();
       if (tokenModel != null) {
         return Right(tokenModel);
       } else {
