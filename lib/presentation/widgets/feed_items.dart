@@ -105,8 +105,7 @@ class FeedItemWidget extends StatelessWidget {
                 Text(
                   feedProvider.errorMessage!,
                   style: const TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: AppColors.error,
+                     color: AppColors.error,
                     fontSize: 16,
                   ),
                   textAlign: TextAlign.center,
@@ -128,8 +127,7 @@ class FeedItemWidget extends StatelessWidget {
             child: Text(
               'No feeds available',
               style: TextStyle(
-                fontFamily: 'Montserrat',
-                color: AppColors.secondaryText,
+                 color: AppColors.secondaryText,
                 fontSize: 16,
               ),
             ),
