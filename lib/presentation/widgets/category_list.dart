@@ -5,7 +5,7 @@ import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_text.
 import 'package:provider/provider.dart';
 
 class CategoryList extends StatelessWidget {
-  const CategoryList({Key? key}) : super(key: key);
+  const CategoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class CategoryList extends StatelessWidget {
         }
 
         return SizedBox(
-          height: 200,
+          height: 35,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -51,7 +51,7 @@ class CategoryList extends StatelessWidget {
               final category = categoryProvider.categories[index];
               return GestureDetector(
                 onTap: () {
-                  categoryProvider.onCategoryChange(index);
+                  categoryProvider.onCategoryChange(index,category.title);
                 },
                 child: Container(
                   margin: const EdgeInsets.only(right: 12),

@@ -40,6 +40,8 @@ dependencies:
   data_connection_checker_tv: ^0.3.5-nullsafety
   dartz: ^0.10.1
   http: ^1.5.0
+  cached_network_image: ^3.4.1
+  video_player: ^2.8.1
 
 dev_dependencies:
   flutter_test:

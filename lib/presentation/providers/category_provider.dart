@@ -6,7 +6,7 @@ class CategoryProvider with ChangeNotifier {
   final GetCategoriesUseCase getCategoriesUseCase;
 
   CategoryProvider(this.getCategoriesUseCase);
-
+String selectedCategory='';
   List<CategoryEntity> _categories = [];
   bool _isLoading = false;
   String? _errorMessage;
@@ -33,8 +33,9 @@ class CategoryProvider with ChangeNotifier {
     }
   }
 
-  void onCategoryChange(int index) {
+  void onCategoryChange(int index,String category) {
     selectedIndex = index;
+    selectedCategory=category;
     notifyListeners();
   }
 }

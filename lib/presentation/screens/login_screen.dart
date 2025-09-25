@@ -5,6 +5,7 @@ import 'package:machine_test_round_2_noviindus/core/extensions/navigation_extens
 import 'package:machine_test_round_2_noviindus/core/extensions/sized_box_extension.dart';
 import 'package:machine_test_round_2_noviindus/presentation/screens/home_screen.dart';
 import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_text.dart';
+import 'package:machine_test_round_2_noviindus/presentation/widgets/video_player_widget.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 
@@ -39,7 +40,7 @@ class AuthScreen extends StatelessWidget {
               decoration: const InputDecoration(labelText: "Enter Phone"),
             ),
             const SizedBox(height: 20),
-            Consumer<AuthProvider>(
+           /* Consumer<AuthProvider>(
               builder: (context, authProvider, child) {
                 if (authProvider.isLoading) {
                   return const CircularProgressIndicator();
@@ -63,8 +64,8 @@ class AuthScreen extends StatelessWidget {
                   child: const Text("Verify OTP"),
                 );
               },
-            ),
-          ],
+            ),*/
+           ],
         ),
       ),
     );

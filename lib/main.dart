@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:machine_test_round_2_noviindus/core/connection/network_info.dart';
 import 'package:machine_test_round_2_noviindus/data/repository/auth_repository_impl.dart';
 import 'package:machine_test_round_2_noviindus/data/services/auth_service.dart';
+import 'package:machine_test_round_2_noviindus/data/services/home_api_service.dart';
 import 'package:machine_test_round_2_noviindus/data/services/token_local_data_source.dart';
 import 'package:machine_test_round_2_noviindus/domain/use_case/auth_use_case.dart';
+import 'package:machine_test_round_2_noviindus/domain/use_case/get_home_feed.dart';
 import 'package:machine_test_round_2_noviindus/presentation/providers/auth_provider.dart';
 import 'package:machine_test_round_2_noviindus/presentation/providers/category_provider.dart';
+import 'package:machine_test_round_2_noviindus/presentation/providers/home_feed_provider.dart';
+import 'package:machine_test_round_2_noviindus/presentation/providers/video_provider.dart';
+import 'package:machine_test_round_2_noviindus/presentation/screens/home_screen.dart';
 import 'package:machine_test_round_2_noviindus/presentation/screens/login_screen.dart';
 import 'package:provider/provider.dart';
-
-import 'data/repository/category_repository_impl.dart';
+ import 'data/repository/category_repository_impl.dart';
+import 'data/repository/home_repository_impl.dart';
 import 'data/services/category_service.dart';
 import 'domain/use_case/get_category_use_case.dart';
 
@@ -23,14 +28,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Auth Dependencies
     final authService = AuthService();
     final localDataSource = TokenLocalDataSource();
     final networkInfo = NetworkInfoImpl(DataConnectionChecker());
-    final apiService = CategoryApiService();
-
-    final repository = CategoryRepositoryImpl(apiService);
-
-    final getCategoriesUseCase = GetCategoriesUseCase(repository);
     final authRepository = AuthRepositoryImpl(
       service: authService,
       localDataSource: localDataSource,
@@ -38,13 +39,28 @@ class MyApp extends StatelessWidget {
     );
     final verifyOtpUseCase = VerifyOtpUseCase(authRepository);
 
+    // Category Dependencies
+    final categoryApiService = CategoryApiService();
+    final categoryRepository = CategoryRepositoryImpl(categoryApiService);
+    final getCategoriesUseCase = GetCategoriesUseCase(categoryRepository);
+
+    // Home Feed Dependencies
+    final homeApiService = HomeApiService();
+    final homeRepository = HomeRepositoryImpl(homeApiService);
+    final getHomeFeedsUseCase = GetHomeFeedsUseCase(homeRepository);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider(verifyOtpUseCase)),
         ChangeNotifierProvider(
-          create: (context) =>
-              CategoryProvider(getCategoriesUseCase)
-                ..fetchCategories(), // Start fetching data immediately
+          create: (context) => CategoryProvider(getCategoriesUseCase)
+            ..fetchCategories(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => HomeFeedProvider(getHomeFeedsUseCase),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VideoProvider(),
         ),
       ],
       child: MaterialApp(
@@ -53,7 +69,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: AuthScreen(),
+        home:HomeScreen() //AuthScreen(),
       ),
     );
   }
