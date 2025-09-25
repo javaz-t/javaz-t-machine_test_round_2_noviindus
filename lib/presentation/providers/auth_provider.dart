@@ -5,8 +5,7 @@ import 'package:machine_test_round_2_noviindus/domain/use_case/auth_use_case.dar
 
 class AuthProvider with ChangeNotifier {
   final VerifyOtpUseCase verifyOtpUseCase;
-
-  AuthProvider(this.verifyOtpUseCase);
+   AuthProvider(this.verifyOtpUseCase);
 
   bool isLoading = false;
   Token? token;

@@ -1,6 +1,10 @@
+
 import 'package:flutter/material.dart';
+import 'package:machine_test_round_2_noviindus/core/constants/app_colors.dart';
 import 'package:machine_test_round_2_noviindus/core/extensions/navigation_extension.dart';
+import 'package:machine_test_round_2_noviindus/core/extensions/sized_box_extension.dart';
 import 'package:machine_test_round_2_noviindus/presentation/screens/home_screen.dart';
+import 'package:machine_test_round_2_noviindus/presentation/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 
@@ -12,11 +16,24 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("OTP Verification")),
-      body: Padding(
+      backgroundColor: AppColors.primaryBackground,
+       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+             40.vs(),
+        CustomText(text: 'Enter Your\nMobile Number'),
+        16.vs(),
+        const SizedBox(height: 16),
+        // Description
+        CustomText(
+          fontWeight: FontWeight.w400,
+          fontSize: 12,
+          text:
+          'Lorem ipsum dolor sit amet consectetur. Porta at id hac vitae. Et tortor at vehicula euismod mi viverra.',
+        ),
+        36.vs(), // Phone nu
             TextField(
               controller: phoneController,
               decoration: const InputDecoration(labelText: "Enter Phone"),
@@ -53,3 +70,4 @@ class AuthScreen extends StatelessWidget {
     );
   }
 }
+
