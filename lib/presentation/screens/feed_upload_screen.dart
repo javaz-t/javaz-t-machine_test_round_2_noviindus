@@ -64,18 +64,20 @@ class _FeedUploadScreenState extends State<FeedUploadScreen> {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             actions: [
-              CategoryTile(
-                isSharePost: true,
-                onTap: () {
-                  if (uploadProvider.isLoading) {
-                    return;
-                  } else {
-                    uploadProvider.uploadFeed();
-                  }
-                },
-                title: 'Share Post',
-                isSelected: false,
-              ),
+              uploadProvider.isLoading
+                  ? const SizedBox.shrink()
+                  : CategoryTile(
+                      isSharePost: true,
+                      onTap: () {
+                        if (uploadProvider.isLoading) {
+                          return;
+                        } else {
+                          uploadProvider.uploadFeed();
+                        }
+                      },
+                      title: 'Share Post',
+                      isSelected: false,
+                    ),
             ],
           ),
           body: uploadProvider.isLoading
@@ -211,8 +213,6 @@ class _FeedUploadScreenState extends State<FeedUploadScreen> {
       },
     );
   }
-
-
 
   Widget _selectedDataDetails({
     required bool isSelected,
